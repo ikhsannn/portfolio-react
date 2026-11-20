@@ -1,0 +1,78 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Palet: netral slate + satu warna aksen (crimson dari logo SANSITE), dipakai seperlunya */
+  --color-accent: #be123c;
+  --color-accent-dark: #9f1239;
+  --color-accent-soft: #fff1f2;
+
+  --font-sans: 'Poppins', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-white font-sans text-slate-600 antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-slate-900;
+  }
+  section[id] {
+    scroll-margin-top: 5rem;
+  }
+  ::selection {
+    @apply bg-accent text-white;
+  }
+}
+
+/* Animasi muncul saat discroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
+
+.typed-cursor {
+  animation: blink 0.9s steps(1) infinite;
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* Pola grid halus untuk latar hero */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(15 23 42 / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(15 23 42 / 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at 50% 40%, black 30%, transparent 75%);
+}
+
+/* Swiper */
+.swiper-pagination-bullet {
+  background: #cbd5e1 !important;
+  opacity: 1 !important;
+  transition: width 0.3s ease;
+}
+.swiper-pagination-bullet-active {
+  background: var(--color-accent) !important;
+  width: 22px !important;
+  border-radius: 9999px !important;
+}
+.swiper-pagination {
+  position: relative !important;
+  margin-top: 1.75rem;
+}
+.swiper-slide {
+  height: auto !important;
+}

@@ -1,0 +1,112 @@
+import { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import { navItems, about } from '../data/site.js'
+import { container } from './container.js'
+
+export default function Navbar({ activeSection }) {
+  const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const { pathname } = useLocation()
+  const onHome = pathname === '/'
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => setOpen(false), [pathname])
+
+  const go = (href) => {
+    setOpen(false)
+    if (onHome) document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  return (
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        open
+          ? 'border-b border-slate-200 bg-white shadow-lg'
+          : scrolled
+            ? 'border-b border-slate-200/70 bg-white/80 backdrop-blur-lg'
+            : 'border-b border-transparent bg-transparent'
+      }`}
+    >
+      <div className={`flex h-20 items-center justify-between ${container}`}>
+        <Link to="/" onClick={() => onHome && window.scrollTo({ top: 0, behavior: 'smooth' })} aria-label="Home">
+          <img src="/assets/img/sansite-color.webp" alt="SANSITE" className="h-12 w-auto" />
+        </Link>
+
+        <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
+          {navItems.map((item) => {
+            const active = onHome && activeSection === item.href.slice(1)
+            return (
+              <Link
+                key={item.href}
+                to={{ pathname: '/', hash: item.href }}
+                onClick={() => go(item.href)}
+                className={`relative rounded-full px-3.5 py-2 text-[15px] font-medium transition-colors xl:px-4 xl:text-base ${
+                  active ? 'text-slate-900' : 'text-slate-500 hover:text-slate-900'
+                }`}
+              >
+                {item.label}
+                <span
+                  className={`absolute inset-x-3.5 -bottom-0.5 h-0.5 rounded-full bg-accent transition-transform duration-300 xl:inset-x-4 ${
+                    active ? 'scale-x-100' : 'scale-x-0'
+                  }`}
+                />
+              </Link>
+            )
+          })}
+        </nav>
+
+        <div className="flex items-center gap-2">
+          <a
+            href={about.cv}
+            target="_blank"
+            rel="noreferrer"
+            className="hidden items-center gap-2 rounded-full bg-slate-900 px-5 py-2.5 text-[15px] font-semibold text-white transition-colors hover:bg-accent sm:inline-flex"
+          >
+            <i className="bi bi-download" /> Resume
+          </a>
+          <button
+            type="button"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-expanded={open}
+            onClick={() => setOpen((o) => !o)}
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-xl text-slate-800 lg:hidden"
+          >
+            <i className={`bi ${open ? 'bi-x-lg' : 'bi-list'}`} />
+          </button>
+        </div>
+      </div>
+
+      {/* Menu mobile */}
+      <div className={`overflow-hidden transition-[max-height] duration-300 lg:hidden ${open ? 'max-h-[480px]' : 'max-h-0'}`}>
+        <nav className={`space-y-1 pt-2 pb-5 ${container}`} aria-label="Mobile">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              to={{ pathname: '/', hash: item.href }}
+              onClick={() => go(item.href)}
+              className={`block rounded-xl px-4 py-3 text-base font-medium ${
+                onHome && activeSection === item.href.slice(1) ? 'bg-slate-100 text-slate-900' : 'text-slate-600'
+              }`}
+            >
+              {item.label}
+            </Link>
+          ))}
+          <a
+            href={about.cv}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-3 flex items-center justify-center gap-2 rounded-full bg-slate-900 px-4 py-3 text-sm font-semibold text-white"
+          >
+            <i className="bi bi-download" /> Download Resume
+          </a>
+        </nav>
+      </div>
+    </header>
+  )
+}
