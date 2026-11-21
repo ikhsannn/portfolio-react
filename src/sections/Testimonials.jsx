@@ -25,19 +25,19 @@ export default function Testimonials() {
         >
           {testimonials.map((t) => (
             <SwiperSlide key={t.name}>
-              <figure className="flex h-full flex-col rounded-3xl border border-slate-200 bg-slate-50 p-7">
+              <figure className="flex h-full flex-col rounded-3xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/40 p-7">
                 <i className="bi bi-quote text-4xl leading-none text-accent" aria-hidden="true" />
-                <blockquote className="mt-3 flex-1 text-[15px] leading-relaxed text-slate-600">{t.quote}</blockquote>
-                <figcaption className="mt-6 flex items-center gap-3 border-t border-slate-200 pt-5">
+                <blockquote className="mt-3 flex-1 text-[15px] leading-relaxed text-slate-600 dark:text-slate-300">{t.quote}</blockquote>
+                <figcaption className="mt-6 flex items-center gap-3 border-t border-slate-200 dark:border-slate-800 pt-5">
                   <img
                     src={t.photo}
                     alt={t.name}
                     loading="lazy"
-                    className="h-12 w-12 rounded-full object-cover ring-2 ring-white"
+                    className="h-12 w-12 rounded-full object-cover ring-2 ring-white dark:ring-slate-800"
                   />
                   <div>
-                    <p className="font-bold text-slate-900">{t.name}</p>
-                    <p className="text-sm text-slate-500">{t.title}</p>
+                    <p className="font-bold text-slate-900 dark:text-slate-50">{t.name}</p>
+                    <p className="text-sm text-slate-500 dark:text-slate-400">{t.title}</p>
                   </div>
                 </figcaption>
               </figure>

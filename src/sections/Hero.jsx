@@ -9,21 +9,21 @@ export default function Hero() {
   const typed = useTyped(hero.typed)
 
   return (
-    <section id="hero" className="relative overflow-hidden bg-white pt-32 pb-20 md:pt-40 md:pb-28">
+    <section id="hero" className="relative overflow-hidden bg-white dark:bg-slate-950 pt-32 pb-20 md:pt-40 md:pb-28">
       {/* Latar: grid halus + cahaya lembut */}
       <div aria-hidden="true" className="bg-grid pointer-events-none absolute inset-0" />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-40 right-[-10%] h-[520px] w-[520px] rounded-full bg-rose-200/40 blur-3xl"
+        className="pointer-events-none absolute -top-40 right-[-10%] h-[520px] w-[520px] rounded-full bg-rose-200/40 dark:bg-rose-500/10 blur-3xl"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-[-20%] left-[-10%] h-[420px] w-[420px] rounded-full bg-sky-200/40 blur-3xl"
+        className="pointer-events-none absolute bottom-[-20%] left-[-10%] h-[420px] w-[420px] rounded-full bg-sky-200/40 dark:bg-sky-500/10 blur-3xl"
       />
 
       <div className={`relative grid items-center gap-14 lg:grid-cols-[1.15fr_0.85fr] ${container}`}>
         <Reveal>
-          <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3.5 py-1.5 text-xs font-medium text-slate-600 shadow-sm backdrop-blur">
+          <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 px-3.5 py-1.5 text-xs font-medium text-slate-600 dark:text-slate-300 shadow-sm backdrop-blur">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
@@ -35,14 +35,14 @@ export default function Hero() {
             {hero.greeting} <span className="text-accent">{hero.name}</span>
           </h1>
 
-          <p className="mt-4 h-8 text-xl font-semibold text-slate-800 sm:text-2xl" aria-live="polite">
+          <p className="mt-4 h-8 text-xl font-semibold text-slate-800 dark:text-slate-200 sm:text-2xl" aria-live="polite">
             {typed}
             <span className="typed-cursor ml-0.5 font-light text-accent" aria-hidden="true">
               |
             </span>
           </p>
 
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-500">{hero.description}</p>
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-500 dark:text-slate-400">{hero.description}</p>
 
           <div className="mt-8 flex flex-wrap gap-3">
             <Link to={{ hash: '#projects' }} className={btnPrimary}>
@@ -61,18 +61,18 @@ export default function Hero() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={s.label}
-                className="flex h-10 w-10 items-center justify-center rounded-full text-lg text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900"
+                className="flex h-10 w-10 items-center justify-center rounded-full text-lg text-slate-500 dark:text-slate-400 transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-50"
               >
                 <i className={`bi ${s.icon}`} />
               </a>
             ))}
           </div>
 
-          <dl className="mt-10 grid max-w-md grid-cols-3 divide-x divide-slate-200 border-t border-slate-200 pt-6">
+          <dl className="mt-10 grid max-w-md grid-cols-3 divide-x divide-slate-200 dark:divide-slate-800 border-t border-slate-200 dark:border-slate-800 pt-6">
             {hero.stats.map((s) => (
               <div key={s.label} className="flex flex-col px-4 first:pl-0">
-                <dt className="text-xs leading-snug text-slate-500">{s.label}</dt>
-                <dd className="order-first text-3xl font-extrabold tracking-tight text-slate-900">{s.value}</dd>
+                <dt className="text-xs leading-snug text-slate-500 dark:text-slate-400">{s.label}</dt>
+                <dd className="order-first text-3xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50">{s.value}</dd>
               </div>
             ))}
           </dl>
@@ -90,12 +90,12 @@ export default function Hero() {
               className="absolute inset-x-0 bottom-0 mx-auto h-full w-auto object-contain object-bottom [mask-image:linear-gradient(to_bottom,black_88%,transparent)]"
               fetchPriority="high"
             />
-            <div className="absolute -left-6 bottom-10 hidden rounded-2xl border border-slate-200 bg-white/95 px-4 py-3 shadow-xl backdrop-blur sm:block">
-              <p className="text-xs text-slate-500">Main stack</p>
-              <p className="text-sm font-bold text-slate-900">Laravel · CodeIgniter</p>
+            <div className="absolute -left-6 bottom-10 hidden rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 px-4 py-3 shadow-xl backdrop-blur sm:block">
+              <p className="text-xs text-slate-500 dark:text-slate-400">Main stack</p>
+              <p className="text-sm font-bold text-slate-900 dark:text-slate-50">Laravel · CodeIgniter</p>
             </div>
-            <div className="absolute -right-4 top-[30%] hidden rounded-2xl border border-slate-200 bg-white/95 px-4 py-3 shadow-xl backdrop-blur sm:block">
-              <p className="flex items-center gap-1.5 text-sm font-bold text-slate-900">
+            <div className="absolute -right-4 top-[30%] hidden rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 px-4 py-3 shadow-xl backdrop-blur sm:block">
+              <p className="flex items-center gap-1.5 text-sm font-bold text-slate-900 dark:text-slate-50">
                 <i className="bi bi-geo-alt-fill text-accent" /> Jakarta, ID
               </p>
             </div>

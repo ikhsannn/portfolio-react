@@ -9,17 +9,17 @@ function TimelineItem({ item, current }) {
       <span className="absolute top-0 bottom-0 left-[5px] w-px bg-slate-200 group-last:hidden" />
       <span
         className={`absolute top-1.5 left-0 h-[11px] w-[11px] rounded-full ring-4 ${
-          current ? 'bg-accent ring-accent/15' : 'bg-slate-300 ring-slate-100'
+          current ? 'bg-accent ring-accent/15' : 'bg-slate-300 dark:bg-slate-600 ring-slate-100 dark:ring-slate-800'
         }`}
       />
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
         <h4 className="text-lg font-bold">{item.role}</h4>
-        <span className="text-sm font-medium whitespace-nowrap text-slate-400">{item.period}</span>
+        <span className="text-sm font-medium whitespace-nowrap text-slate-400 dark:text-slate-500">{item.period}</span>
       </div>
-      <p className="mt-0.5 font-medium text-slate-600">{item.company}</p>
+      <p className="mt-0.5 font-medium text-slate-600 dark:text-slate-300">{item.company}</p>
       <ul className="mt-3 space-y-2">
         {item.points.map((p) => (
-          <li key={p} className="flex gap-2.5 text-[15px] leading-relaxed text-slate-500">
+          <li key={p} className="flex gap-2.5 text-[15px] leading-relaxed text-slate-500 dark:text-slate-400">
             <i className="bi bi-check2 mt-0.5 text-accent" />
             <span>{p}</span>
           </li>
@@ -31,9 +31,9 @@ function TimelineItem({ item, current }) {
 
 function Block({ title, icon, items, highlightFirst }) {
   return (
-    <div className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-8">
+    <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8">
       <h3 className="mb-7 flex items-center gap-3 text-xl font-bold">
-        <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-900 text-base text-white">
+        <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-900 dark:bg-slate-800 text-base text-white">
           <i className={`bi ${icon}`} />
         </span>
         {title}

@@ -2,11 +2,14 @@ import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { navItems, about } from '../data/site.js'
 import { container } from './container.js'
+import useTheme from '../hooks/useTheme.js'
 
 export default function Navbar({ activeSection }) {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const { pathname } = useLocation()
+  const { theme, toggle } = useTheme()
+  const isDark = theme === 'dark'
   const onHome = pathname === '/'
 
   useEffect(() => {
@@ -27,15 +30,16 @@ export default function Navbar({ activeSection }) {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         open
-          ? 'border-b border-slate-200 bg-white shadow-lg'
+          ? 'border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 shadow-lg'
           : scrolled
-            ? 'border-b border-slate-200/70 bg-white/80 backdrop-blur-lg'
+            ? 'border-b border-slate-200/70 dark:border-slate-800/70 bg-white/80 dark:bg-slate-950/80 backdrop-blur-lg'
             : 'border-b border-transparent bg-transparent'
       }`}
     >
       <div className={`flex h-20 items-center justify-between ${container}`}>
         <Link to="/" onClick={() => onHome && window.scrollTo({ top: 0, behavior: 'smooth' })} aria-label="Home">
-          <img src="/assets/img/sansite-color.webp" alt="SANSITE" className="h-12 w-auto" />
+          <img src="/assets/img/sansite-color.webp" alt="SANSITE" className="h-12 w-auto dark:hidden" />
+          <img src="/assets/img/sansite-white.webp" alt="SANSITE" className="hidden h-12 w-auto dark:block" />
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
@@ -47,7 +51,7 @@ export default function Navbar({ activeSection }) {
                 to={{ pathname: '/', hash: item.href }}
                 onClick={() => go(item.href)}
                 className={`relative rounded-full px-3.5 py-2 text-[15px] font-medium transition-colors xl:px-4 xl:text-base ${
-                  active ? 'text-slate-900' : 'text-slate-500 hover:text-slate-900'
+                  active ? 'text-slate-900 dark:text-slate-50' : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50'
                 }`}
               >
                 {item.label}
@@ -62,11 +66,20 @@ export default function Navbar({ activeSection }) {
         </nav>
 
         <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={toggle}
+            aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+            title={isDark ? 'Light mode' : 'Dark mode'}
+            className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-slate-200 bg-white text-lg text-slate-700 transition-colors hover:border-slate-300 hover:text-slate-900 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-slate-700 dark:hover:text-white"
+          >
+            <i className={`bi ${isDark ? 'bi-sun' : 'bi-moon-stars'}`} />
+          </button>
           <a
             href={about.cv}
             target="_blank"
             rel="noreferrer"
-            className="hidden items-center gap-2 rounded-full bg-slate-900 px-5 py-2.5 text-[15px] font-semibold text-white transition-colors hover:bg-accent sm:inline-flex"
+            className="hidden items-center gap-2 rounded-full bg-slate-900 px-5 py-2.5 text-[15px] font-semibold text-white transition-colors hover:bg-accent dark:bg-accent dark:hover:bg-accent-dark sm:inline-flex"
           >
             <i className="bi bi-download" /> Resume
           </a>
@@ -75,7 +88,7 @@ export default function Navbar({ activeSection }) {
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
             onClick={() => setOpen((o) => !o)}
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-xl text-slate-800 lg:hidden"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-xl text-slate-800 dark:text-slate-200 lg:hidden"
           >
             <i className={`bi ${open ? 'bi-x-lg' : 'bi-list'}`} />
           </button>
@@ -91,7 +104,7 @@ export default function Navbar({ activeSection }) {
               to={{ pathname: '/', hash: item.href }}
               onClick={() => go(item.href)}
               className={`block rounded-xl px-4 py-3 text-base font-medium ${
-                onHome && activeSection === item.href.slice(1) ? 'bg-slate-100 text-slate-900' : 'text-slate-600'
+                onHome && activeSection === item.href.slice(1) ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-50' : 'text-slate-600 dark:text-slate-300'
               }`}
             >
               {item.label}
@@ -101,7 +114,7 @@ export default function Navbar({ activeSection }) {
             href={about.cv}
             target="_blank"
             rel="noreferrer"
-            className="mt-3 flex items-center justify-center gap-2 rounded-full bg-slate-900 px-4 py-3 text-sm font-semibold text-white"
+            className="mt-3 flex items-center justify-center gap-2 rounded-full bg-slate-900 dark:bg-accent px-4 py-3 text-sm font-semibold text-white"
           >
             <i className="bi bi-download" /> Download Resume
           </a>

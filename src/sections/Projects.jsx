@@ -9,16 +9,16 @@ export function ProjectCard({ p }) {
   return (
     <Link
       to={`/projects/${p.slug}`}
-      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl hover:shadow-slate-900/5"
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 dark:hover:border-slate-700 hover:shadow-xl hover:shadow-slate-900/5 dark:hover:shadow-black/30"
     >
-      <div className="relative aspect-[16/10] overflow-hidden border-b border-slate-100 bg-slate-100">
+      <div className="relative aspect-[16/10] overflow-hidden border-b border-slate-100 dark:border-slate-800 bg-slate-100 dark:bg-slate-800">
         <img
           src={p.thumbnail}
           alt={p.title}
           loading="lazy"
           className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]"
         />
-        <span className="absolute top-3 left-3 rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-semibold text-slate-700 shadow-sm backdrop-blur">
+        <span className="absolute top-3 left-3 rounded-full bg-white/90 dark:bg-slate-900/90 px-2.5 py-1 text-[11px] font-semibold text-slate-700 dark:text-slate-300 shadow-sm backdrop-blur">
           {categoryLabel[p.category]}
         </span>
         {p.link && (
@@ -28,17 +28,17 @@ export function ProjectCard({ p }) {
         )}
       </div>
       <div className="flex flex-1 flex-col p-5">
-        <p className="text-xs font-medium text-slate-400">
+        <p className="text-xs font-medium text-slate-400 dark:text-slate-500">
           {p.client} · {p.year}
         </p>
         <h3 className="mt-1.5 flex items-start justify-between gap-3 text-lg leading-snug font-bold">
           {p.title}
-          <i className="bi bi-arrow-up-right shrink-0 text-base text-slate-300 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent" />
+          <i className="bi bi-arrow-up-right shrink-0 text-base text-slate-300 dark:text-slate-600 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent" />
         </h3>
-        <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-500">{p.summary}</p>
+        <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-500 dark:text-slate-400">{p.summary}</p>
         <ul className="mt-4 flex flex-wrap gap-1.5">
           {p.stack.map((t) => (
-            <li key={t} className="rounded-md bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-600">
+            <li key={t} className="rounded-md bg-slate-100 dark:bg-slate-800 px-2 py-0.5 text-xs font-medium text-slate-600 dark:text-slate-300">
               {t}
             </li>
           ))}
@@ -63,7 +63,7 @@ export default function Projects() {
         description="Web platforms, desktop software, and interface design for companies, schools, and public institutions."
       />
       <Reveal delay={100} className="-mt-4 mb-10 overflow-x-auto pb-1">
-        <div className="inline-flex gap-1 rounded-full border border-slate-200 bg-white p-1">
+        <div className="inline-flex gap-1 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-1">
           {projectFilters.map((f) => (
             <button
               key={f.key}
@@ -71,7 +71,7 @@ export default function Projects() {
               onClick={() => setFilter(f.key)}
               aria-pressed={filter === f.key}
               className={`cursor-pointer rounded-full px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors ${
-                filter === f.key ? 'bg-slate-900 text-white' : 'text-slate-500 hover:text-slate-900'
+                filter === f.key ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900' : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50'
               }`}
             >
               {f.label}

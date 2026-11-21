@@ -10,8 +10,8 @@ export default function Contact() {
   ]
 
   return (
-    <section id="contact" className={`bg-white pb-20 md:pb-28 ${container}`}>
-      <Reveal className="relative overflow-hidden rounded-[2rem] bg-slate-950 px-6 py-14 text-center sm:px-12 md:py-20">
+    <section id="contact" className={`bg-white dark:bg-slate-950 pb-20 md:pb-28 ${container}`}>
+      <Reveal className="relative overflow-hidden rounded-[2rem] bg-slate-950 dark:bg-slate-900 dark:ring-1 dark:ring-white/10 px-6 py-14 text-center sm:px-12 md:py-20">
         <div aria-hidden="true" className="pointer-events-none absolute -top-32 left-1/2 h-72 w-[36rem] -translate-x-1/2 rounded-full bg-accent/40 blur-3xl" />
         <div className="relative">
           <p className="mb-3 text-sm font-semibold tracking-[0.18em] text-rose-300 uppercase">Contact</p>
